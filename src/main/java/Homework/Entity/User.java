@@ -19,11 +19,6 @@ public class User extends BaseEntity{
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
               fetch = FetchType.LAZY)
-    @JoinColumn(name = "country")
-    private Country country;
-
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
-              fetch = FetchType.LAZY)
     @JoinColumn(name = "city")
     private City city;
 }

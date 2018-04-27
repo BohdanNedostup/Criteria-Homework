@@ -2,12 +2,9 @@ package Homework;
 
 import Homework.Entity.*;
 import javax.persistence.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.io.*;
+import java.util.*;
 
 public class App 
 {
@@ -16,7 +13,23 @@ public class App
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Database.showUsers(entityManager);
+        CriteriaBuilder criteriaBuilder = entityManagerFactory.getCriteriaBuilder();
+
+//        fillRandomCountriesAndCities(entityManager);
+//        fillRandomUsers(entityManager);
+
+//        Database.showUsers(criteriaBuilder, entityManager);
+//        Database.showCountriesInReverseOrder(criteriaBuilder, entityManager);
+//        Database.showCities(criteriaBuilder, entityManager);
+//        Database.showUsersInReverseOrder(criteriaBuilder, entityManager);
+//        Database.showCountriesWithFirstA(criteriaBuilder, entityManager);
+//        Database.showCitiesWithPrelastNOrR(criteriaBuilder, entityManager);
+//        Database.showUsersWithMinAge(criteriaBuilder, entityManager);
+//        Database.averageUsersAge(criteriaBuilder, entityManager);
+//        Database.showUserAndUserCity(criteriaBuilder, entityManager);
+//        Database.showUserAndUserCityWhereUserIdNotIn(criteriaBuilder, entityManager);
+//        Database.showAllUsersData(criteriaBuilder, entityManager);
+
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -84,12 +97,8 @@ public class App
             User u = new User();
             u.setFullName(users.get(i));
             u.setAge(15 + i);
-            u.setCountry(countries.get(new Random().nextInt(20)));
-            u.setCity(u.getCountry().getCities().get(new Random().nextInt(3)));
+            u.setCity(countries.get(new Random().nextInt(20)).getCities().get(new Random().nextInt(3)));
             entityManager.persist(u);
         }
     }
-
-
-
 }
